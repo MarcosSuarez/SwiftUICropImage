@@ -13,21 +13,33 @@ struct ImageInfo: Identifiable {
 }
 
 struct ContentView: View {
+
+    @StateObject private var viewModel = ViewModel()
+    @State private var numberOfImages: CGFloat = 1
     
-    @State private var image: Image?
-    @State private var imagesCuts:[ImageInfo] = []
+    private var image = Image(.fourCats)
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             Text("Hello, Cats!")
                 .font(.title)
             
-            image?
+            image
                 .resizable()
                 .scaledToFit()
             
+            Slider(value: $numberOfImages, in: 1...10, step: 1) {
+                
+            } minimumValueLabel: {
+                Text("1")
+            } maximumValueLabel: {
+                Text("10")
+            }
+            
+            Text("Number of images: \(Int(numberOfImages))")
+            
             HStack(spacing: 8) {
-                ForEach(imagesCuts) { imageData in
+                ForEach(viewModel.imagesCuts) { imageData in
                     imageData.image
                         .resizable()
                         .scaledToFit()
@@ -35,7 +47,7 @@ struct ContentView: View {
             }
             
             Button {
-                imagesCuts.shuffle()
+                viewModel.imagesCuts.shuffle()
             } label: {
                 Text("Shuffle")
             }
@@ -43,44 +55,12 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
-        .onAppear(perform: loadImage)
+        .onChange(of: numberOfImages) { number in
+            viewModel.getCropImages(number: number, image: image)
+        }
     }
 }
 
 #Preview {
     ContentView()
-}
-
-private extension ContentView {
-    @MainActor
-    func loadImage() {
-        image = Image(.fourCats)
-        
-        guard let image,
-              let cgImg = ImageRenderer(content: image).cgImage
-        else { return }
-        
-        let numberOfImages: Int = 4
-        let sizeCGImage = cgImg.width/numberOfImages
-        
-        for index in 0..<numberOfImages {
-            let sizeCrop = CGSize(width: sizeCGImage, height: cgImg.height)
-            let cgRect = CGRect(origin: CGPoint(x: index*sizeCGImage, y: 0), size: sizeCrop)
-            
-            guard let cropImage =  cgImg.cropping(to: cgRect)
-            else { return }
-            
-            let newImage = convertToImage(cgImg: cropImage, width: CGFloat(cropImage.width), height: CGFloat(cropImage.height))
-            
-            imagesCuts.append(ImageInfo(id: index, image: newImage))
-        }
-    }
-    
-    func convertToImage(cgImg: CGImage, width: CGFloat, height: CGFloat) -> Image {
-#if (os(macOS))
-        Image(nsImage: NSImage(cgImage: cgImg, size: NSSize(width: width, height: height)))
-#else
-        Image(uiImage: UIImage(cgImage: cgImg))
-#endif
-    }
 }

@@ -11,6 +11,7 @@
 		192280142C2EDBFC00F2EBDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192280132C2EDBFC00F2EBDE /* ContentView.swift */; };
 		192280162C2EDBFD00F2EBDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192280152C2EDBFD00F2EBDE /* Assets.xcassets */; };
 		1922801A2C2EDBFD00F2EBDE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192280192C2EDBFD00F2EBDE /* Preview Assets.xcassets */; };
+		19CD972F2C30029A00C12D91 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CD972E2C30029A00C12D91 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		192280152C2EDBFD00F2EBDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		192280172C2EDBFD00F2EBDE /* SwiftUICropImage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUICropImage.entitlements; sourceTree = "<group>"; };
 		192280192C2EDBFD00F2EBDE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		19CD972E2C30029A00C12D91 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				192280112C2EDBFC00F2EBDE /* SwiftUICropImageApp.swift */,
 				192280132C2EDBFC00F2EBDE /* ContentView.swift */,
+				19CD972E2C30029A00C12D91 /* ViewModel.swift */,
 				192280152C2EDBFD00F2EBDE /* Assets.xcassets */,
 				192280172C2EDBFD00F2EBDE /* SwiftUICropImage.entitlements */,
 				192280182C2EDBFD00F2EBDE /* Preview Content */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				192280142C2EDBFC00F2EBDE /* ContentView.swift in Sources */,
+				19CD972F2C30029A00C12D91 /* ViewModel.swift in Sources */,
 				192280122C2EDBFC00F2EBDE /* SwiftUICropImageApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
