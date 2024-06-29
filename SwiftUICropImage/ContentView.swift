@@ -56,7 +56,10 @@ struct ContentView: View {
         }
         .padding()
         .onChange(of: numberOfImages) { number in
-            viewModel.getImages(number: number, from: image)
+            viewModel.getImages(number: number)
+        }
+        .onAppear {
+            viewModel.getCGImage(from: image)
         }
     }
 }

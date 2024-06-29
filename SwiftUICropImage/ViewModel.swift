@@ -11,17 +11,24 @@ import SwiftUI
 final class ViewModel: ObservableObject {
     @Published var imagesCuts:[ImageInfo] = []
     
-    @MainActor
-    func getImages(number: CGFloat, from image: Image) {
+    private var cgImage: CGImage?
+    
+    @MainActor 
+    func getCGImage(from image: Image) {
         guard let cgImg = ImageRenderer(content: image).cgImage
         else { return }
-        imagesCuts = createImages(Int(number), from: cgImg)
+        cgImage = cgImg
+    }
+    
+    func getImages(number: CGFloat) {
+        imagesCuts = createImages(Int(number))
     }
 }
 
 private extension ViewModel {
     
-    func createImages(_ numberOfImages: Int, from cgImage: CGImage) -> [ImageInfo] {
+    func createImages(_ numberOfImages: Int) -> [ImageInfo] {
+        guard let cgImage, numberOfImages > 0 else { return [] }
         let sizeCGImage = cgImage.width/numberOfImages
         var images: [ImageInfo] = []
         for index in 0..<numberOfImages {
