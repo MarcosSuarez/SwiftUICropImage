@@ -12,16 +12,16 @@ final class ViewModel: ObservableObject {
     @Published var imagesCuts:[ImageInfo] = []
     
     @MainActor
-    func getCropImages(number: CGFloat, image: Image) {
+    func getImages(number: CGFloat, from image: Image) {
         guard let cgImg = ImageRenderer(content: image).cgImage
         else { return }
-        imagesCuts = getImages(Int(number), from: cgImg)
+        imagesCuts = createImages(Int(number), from: cgImg)
     }
 }
 
 private extension ViewModel {
     
-    func getImages(_ numberOfImages: Int, from cgImage: CGImage) -> [ImageInfo] {
+    func createImages(_ numberOfImages: Int, from cgImage: CGImage) -> [ImageInfo] {
         let sizeCGImage = cgImage.width/numberOfImages
         var images: [ImageInfo] = []
         for index in 0..<numberOfImages {

@@ -17,7 +17,7 @@ struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
     @State private var numberOfImages: CGFloat = 1
     
-    private var image = Image(.fourCats)
+    private let image = Image(.fourCats)
     
     var body: some View {
         VStack(spacing: 8) {
@@ -56,7 +56,7 @@ struct ContentView: View {
         }
         .padding()
         .onChange(of: numberOfImages) { number in
-            viewModel.getCropImages(number: number, image: image)
+            viewModel.getImages(number: number, from: image)
         }
     }
 }
